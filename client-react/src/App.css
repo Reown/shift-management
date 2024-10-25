@@ -1,0 +1,33 @@
+body {
+    background-color: #181818;
+    color: #F8F8F8;
+}
+
+.loginblock {
+    background-color: #202020;
+    border-color: #404040;
+    color: #F8F8F8;
+    width: 350px;
+    margin-top: 200px;
+}
+
+.btn {
+    background-color: #007053;
+    color: #F8F8F8;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #00bc8c;
+}
+
+.textarea {
+    background-color: #181818;
+    border-color: #007053;
+    color: #F8F8F8;
+}
+
+.textarea:focus{
+    background: transparent;
+    color: #F8F8F8;
+}

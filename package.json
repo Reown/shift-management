@@ -1,0 +1,13 @@
+{
+  "name": "react-ts-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client-react && npm run dev",
+    "server": "cd server-express && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
