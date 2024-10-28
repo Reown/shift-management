@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 import { login } from "../services/Person";
 
-const clickLogin = (item: string[]) => {
-  console.log(item);
-  login(item)
-    .then((res) => {
-      console.log(res);
-      if (!res) {
-        throw "failed to log into " + item[0];
-      }
-      console.log("logged into " + item[0]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
 const Login = () => {
   useEffect(() => {});
+
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const clickLogin = (item: string[]) => {
+    console.log(item);
+    login(item)
+      .then((res) => {
+        console.log(res);
+        if (!res) {
+          throw "failed to log into " + item[0];
+        }
+        console.log("logged into " + item[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
