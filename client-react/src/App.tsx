@@ -7,7 +7,6 @@ import ListGroup from "./components/ListGroup";
 import Button from "./components/Button";
 import Alert from "./components/Alert";
 import ProfileButton from "./components/ProfileButton";
-import LoginForm from "./components/LoginForm";
 import Cookies from "js-cookie";
 
 function App() {
@@ -73,11 +72,6 @@ function App() {
 
   return (
     <div>
-      <div className="card loginblock mx-auto">
-        <div className="card-body">
-          <LoginForm onClick={clickLogin}></LoginForm>
-        </div>
-      </div>
       <div>
         <ListGroup
           items={items}
@@ -100,11 +94,7 @@ function App() {
           <ProfileButton onClick={clickAbout}>About</ProfileButton>
         </Link>
       </div>
-      <div className="card loginblock mx-auto">
-        <div className="card-body">
-          <LoginForm onClick={clickRegister}></LoginForm>
-        </div>
-      </div>
+
       <Button onClick={clickGetTest}>test</Button>
     </div>
   );
