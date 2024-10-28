@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 
 function App() {
   useEffect(() => {
-    //navigate("/login");)
+    navigate("/login");
   });
 
   let items = ["sg", "my", "us", "eu", "en", "aa"];
