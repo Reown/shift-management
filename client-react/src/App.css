@@ -37,3 +37,7 @@ body {
     background: transparent;
     color: #F8F8F8;
 }
+
+.container {
+    display:flex;
+}
