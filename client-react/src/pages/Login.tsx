@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { login } from "../services/Person";
-import LoginForm from "../components/LoginForm";
 
 const clickLogin = (item: string[]) => {
   console.log(item);
