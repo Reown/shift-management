@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ParentContext } from "./SignupAcc";
+import { ParentContext } from "./SignUpAcc";
 
 const SignUpDet = () => {
   const { setIsDisabled } = useContext(ParentContext);
