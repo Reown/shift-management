@@ -5,8 +5,8 @@ import ProfilesPage from "./pages/ProfilesPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
-import SignUpAcc from "./pages/SignupAcc";
-import SignUpDet from "./pages/SignupDet";
+import SignUpAcc from "./pages/SignUpAcc";
+import SignUpDet from "./pages/SignUpDet";
 
 const Router = createBrowserRouter([
   {
