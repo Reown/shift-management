@@ -5,8 +5,8 @@ import ProfilesPage from "./pages/ProfilesPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
-import SignupAcc from "./pages/SignupAcc";
-import SignupDet from "./pages/SignupDet";
+import SignUpAcc from "./pages/SignupAcc";
+import SignUpDet from "./pages/SignupDet";
 
 const Router = createBrowserRouter([
   {
@@ -20,8 +20,8 @@ const Router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignupAcc />,
-    children: [{ path: "/signup/details", element: <SignupDet /> }],
+    element: <SignUpAcc />,
+    children: [{ path: "/signup/details", element: <SignUpDet /> }],
   },
   {
     path: "/about",
