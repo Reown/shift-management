@@ -3,22 +3,24 @@ body {
     color: #F8F8F8;
 }
 
+.container {
+    display:flex;
+}
+
+.item1 {
+    height:325px;
+}
+
+.item2 {
+    height:600px;
+}
+
 .loginblock {
     background-color: #202020;
     border-color: #404040;
     color: #F8F8F8;
     width: 340px;
     margin-top: 200px;
-}
-
-.btn {
-    background-color: #007053;
-    color: #F8F8F8;
-    width: 95%;
-}
-
-.btn:hover {
-    background-color: #00bc8c;
 }
 
 .formbody {
@@ -38,6 +40,17 @@ body {
     color: #F8F8F8;
 }
 
-.container {
-    display:flex;
+.btn {
+    background-color: #007053;
+    color: #F8F8F8;
+    width: 95%;
+}
+
+.btn:hover {
+    background-color: #00bc8c;
+}
+
+.disabled {
+    pointer-events: none; 
+    opacity: 0.5; 
 }
