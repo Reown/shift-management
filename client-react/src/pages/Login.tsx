@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Login = () => {
   useEffect(() => {});
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -14,7 +16,8 @@ const Login = () => {
         if (!res) {
           throw "failed to log into " + item[0];
         }
-        console.log("logged into " + item[0]);
+        console.log("loggedin");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log(err);

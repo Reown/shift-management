@@ -15,7 +15,7 @@ export const register = async (item: string) => {
 export const login = async (item: string[]) => {
   try {
     const response = await personAxios.post("/login", item);
-    if (response.status === 201) {
+    if (response.status === 200) {
       return true;
     }
     return false;

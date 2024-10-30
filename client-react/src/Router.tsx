@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUpAcc from "./pages/SignUpAcc";
 import SignUpDet from "./pages/SignUpDet";
 import Register from "./pages/Register";
+import UserDashboard from "./pages/UserDashboard";
 
 const Router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <></>,
+    element: <UserDashboard />,
   },
 ]);
 

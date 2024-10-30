@@ -177,10 +177,18 @@ export const login = async (req: Request, res: Response): Promise<void> => {
           }
         }
 
-        console.log("aaa");
+        res.status(200).json({ message: "login success" });
       }
     });
   } catch (err) {
     console.log();
   }
+};
+
+export const getInfo = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const entityManager = await getEntityManager();
+
+    await entityManager.transaction(async (transactionalEntityManager) => {});
+  } catch (err) {}
 };
