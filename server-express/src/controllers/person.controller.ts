@@ -12,20 +12,26 @@ export const insert = async (req: Request, res: Response): Promise<void> => {
 
     const personData = [
       {
-        username: "testuser49",
-        auth: { password: "testpw49" },
-        role: { role: RolesEnum.MANAGER },
-        info: { name: "testname49", age: 49, joindate: new Date() },
+        email: "testadmin1",
+        auth: { password: "testpw1" },
+        role: { role: RolesEnum.ADMIN },
+        info: {
+          firstname: "first1",
+          lastname: "last1",
+          dob: "test",
+          joindate: new Date(),
+        },
       },
     ];
 
     const splitData = personData.map((data) => ({
-      personDetails: { username: data.username },
+      personDetails: { email: data.email },
       authDetails: { password: data.auth.password },
       roleDetails: { role: data.role.role },
       infoDetails: {
-        name: data.info.name,
-        age: data.info.age,
+        firstname: data.info.firstname,
+        lastname: data.info.lastname,
+        dob: data.info.dob,
         joindate: data.info.joindate,
       },
     }));

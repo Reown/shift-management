@@ -1,13 +1,14 @@
 --queries to create tables used
 CREATE TABLE person (
     id serial PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL
+    email VARCHAR(255) UNIQUE NOT NULL
 );
 
 CREATE TABLE person_info (
     id serial PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    age INT NOT NULL,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    dob VARCHAR(255) NOT NULL,
     joindate DATE NOT NULL ,
     person_id INT,
     CONSTRAINT fk_person_info FOREIGN KEY (person_id)

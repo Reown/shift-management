@@ -14,12 +14,15 @@ export class PersonInfo extends BaseEntity {
   id: number;
 
   @Column({ nullable: false })
-  name: string;
+  firstname: string;
 
-  @Column()
-  age: number;
+  @Column({ nullable: false })
+  lastname: string;
 
-  @Column()
+  @Column({ nullable: false })
+  dob: string;
+
+  @Column({ nullable: false })
   joindate: Date;
 
   @OneToOne(() => Person)

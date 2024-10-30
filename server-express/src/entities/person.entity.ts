@@ -2,7 +2,6 @@ import {
   BaseEntity,
   Column,
   Entity,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -16,7 +15,7 @@ export class Person extends BaseEntity {
   id: number;
 
   @Column({ nullable: false, unique: true })
-  username: string;
+  email: string;
 
   @OneToOne(() => PersonRole, (role) => role.person, { cascade: true })
   role: PersonRole;
