@@ -152,19 +152,35 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const entityManager = await getEntityManager();
     const data = req.body;
     const email = data[0];
+    const password1 = data[1];
 
     await entityManager.transaction(async (transactionalEntityManager) => {
       {
         const getEmail = await transactionalEntityManager.findOne(Person, {
           where: { email: email },
         });
+
         if (getEmail === null) {
-          throw "email not found";
+          res.status(404).json({ message: "user not found" });
+          return;
         }
-        console.log(getEmail);
+
+        const getpw = await transactionalEntityManager.findOne(PersonAuth, {
+          where: { person: getEmail },
+        });
+
+        if (getpw) {
+          const { password } = getpw;
+          if (password !== password1) {
+            res.status(401).json({ message: "wrong pw" });
+            return;
+          }
+        }
+
+        console.log("aaa");
       }
     });
   } catch (err) {
-    console.log(err);
+    console.log();
   }
 };
