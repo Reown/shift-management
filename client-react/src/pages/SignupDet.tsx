@@ -1,49 +1,57 @@
 import { useContext, useEffect, useState } from "react";
 import { ParentContext } from "./SignUpAcc";
+import { LabeledTextField } from "../components/LabeledTextField";
 
 const SignUpDet = () => {
-  const { setIsDisabled } = useContext(ParentContext);
   useEffect(() => {
     setIsDisabled(true);
     return () => {
       setIsDisabled(false);
     };
   });
-  const [email, setEmail] = useState<string>("");
+
+  const { setIsDisabled } = useContext(ParentContext);
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [birthdate, setBirthdate] = useState<string>("");
+
+  const clickSignup = (item: string[]) => {
+    console.log([firstName, lastName, birthdate]);
+  };
 
   return (
     <div className="card loginblock mx-auto item2">
       <div className="card-body">
         <form className="row g-3 formbody">
           <div className="col-md-6">
-            <label>First Name</label>
-            <input
-              type="text"
-              className="form-control textarea"
-              id="username"
-            />
+            <LabeledTextField
+              children={["First Name", "text"]}
+              onChange={(e) => {
+                setFirstName(e);
+              }}
+            ></LabeledTextField>
           </div>
           <div className="col-md-6">
-            <label>Last Name</label>
-            <input
-              type="password"
-              className="form-control textarea"
-              id="password"
-            />
+            <LabeledTextField
+              children={["Last Name", "text"]}
+              onChange={(e) => {
+                setLastName(e);
+              }}
+            ></LabeledTextField>
           </div>
-          <label>Email</label>
-          <input
-            type="password"
-            className="form-control textarea"
-            id="password"
-          />
-          <label>Date of Birth</label>
-          <input
-            type="password"
-            className="form-control textarea"
-            id="password"
-          />
-          <button type="button" className="btn">
+          <LabeledTextField
+            children={["Date of Birth", "date"]}
+            onChange={(e) => {
+              setBirthdate(e);
+            }}
+          ></LabeledTextField>
+          <button
+            type="button"
+            className="btn"
+            onClick={() => {
+              clickSignup([]);
+            }}
+          >
             Signup
           </button>
         </form>
@@ -55,3 +63,6 @@ const SignUpDet = () => {
 export default SignUpDet;
 
 // role, occupation
+//create label+textbox component
+//const displayChild = children[1]
+//<ParentComponent children={['child1', "child2"]};

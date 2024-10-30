@@ -1,12 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { LabeledTextField } from "../components/LabeledTextField";
 
-interface SignUpAccContextType {
+interface SignUpAccContext {
   isDisabled: boolean;
   setIsDisabled: (disabled: boolean) => void;
 }
 
-export const ParentContext = createContext<SignUpAccContextType>({
+export const ParentContext = createContext<SignUpAccContext>({
   isDisabled: false,
   setIsDisabled: () => {},
 });
@@ -37,33 +38,29 @@ const SignUpAcc = () => {
         >
           <div className="card-body">
             <form className="row g-3 formbody">
-              <label>Username</label>
-              <input
-                type="text"
-                className="form-control textarea"
-                id="username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control textarea"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <LabeledTextField
+                children={["Emailtest", "text"]}
+                onChange={(e) => setUsername(e)}
+              ></LabeledTextField>
+              <LabeledTextField
+                children={["Password", "password"]}
+                onChange={(e) => {
+                  setPassword(e);
+                }}
+              ></LabeledTextField>
               <label>Confirm Password</label>
               <input
                 type="password"
-                className="form-control textarea"
+                className="form-control textfield"
                 id="cfmpassword"
                 onChange={(e) => setCfmPassword(e.target.value)}
               />
               <button
                 type="button"
+                className="btn"
                 onClick={() => {
                   clickContinue([username]);
                 }}
-                className="btn"
               >
                 Continue
               </button>
