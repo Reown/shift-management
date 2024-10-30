@@ -7,7 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
 import SignUpAcc from "./pages/SignUpAcc";
 import SignUpDet from "./pages/SignUpDet";
-import Register from "./pages/Register.page";
+import Register from "./pages/Register";
 
 const Router = createBrowserRouter([
   {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { register } from "../services/Register.service";
+import { register } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Register = () => {

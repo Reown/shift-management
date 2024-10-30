@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { login } from "../services/Person";
+import { login } from "../services/OldPerson";
+import { LabeledTextField } from "../components/LabeledTextField";
 
 const Login = () => {
   useEffect(() => {});
@@ -27,20 +28,14 @@ const Login = () => {
       <div className="card loginblock mx-auto">
         <div className="card-body">
           <form className="row g-3 formbody">
-            <label>Username</label>
-            <input
-              type="text"
-              className="form-control textarea"
-              id="username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control textarea"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <LabeledTextField
+              children={["Email", "text"]}
+              onChange={(e) => setUsername(e)}
+            ></LabeledTextField>
+            <LabeledTextField
+              children={["Password", "password"]}
+              onChange={(e) => setUsername(e)}
+            ></LabeledTextField>
             <button
               type="button"
               onClick={() => {

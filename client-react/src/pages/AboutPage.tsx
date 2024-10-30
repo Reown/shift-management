@@ -1,4 +1,4 @@
-import { gettest } from "../services/Person";
+import { gettest } from "../services/OldPerson";
 import Cookies from "js-cookie";
 
 function AboutPage() {

@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { newtask } from "./services/newtask";
-import { register, login, gettest } from "./services/Person";
+import { register, login, gettest } from "./services/OldPerson";
 import ListGroup from "./components/ListGroup";
 import Button from "./components/Button";
 import Alert from "./components/Alert";
