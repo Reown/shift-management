@@ -126,13 +126,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     await entityManager.transaction(async (transactionalEntityManager) => {
       for (const details of splitNewStaff) {
-        const newPerson = await transactionalEntityManager.save(
+        const newStaff = await transactionalEntityManager.save(
           Person,
           details.personDetails
         );
         await transactionalEntityManager.save(PersonAuth, {
           ...details.authDetails,
-          person: newPerson,
+          person: newStaff,
         });
       }
     });
@@ -147,4 +147,24 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const login = async (req: Request, res: Response): Promise<void> => {};
+export const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const entityManager = await getEntityManager();
+    const data = req.body;
+    const email = data[0];
+
+    await entityManager.transaction(async (transactionalEntityManager) => {
+      {
+        const getEmail = await transactionalEntityManager.findOne(Person, {
+          where: { email: email },
+        });
+        if (getEmail === null) {
+          throw "email not found";
+        }
+        console.log(getEmail);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

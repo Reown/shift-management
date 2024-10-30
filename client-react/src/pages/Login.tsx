@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { login } from "../services/OldPerson";
+import { login } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Login = () => {
   useEffect(() => {});
 
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const clickLogin = (item: string[]) => {
-    console.log(item);
     login(item)
       .then((res) => {
-        console.log(res);
         if (!res) {
           throw "failed to log into " + item[0];
         }
@@ -30,16 +28,16 @@ const Login = () => {
           <form className="row g-3 formbody">
             <LabeledTextField
               children={["Email", "text"]}
-              onChange={(e) => setUsername(e)}
+              onChange={(e) => setEmail(e)}
             ></LabeledTextField>
             <LabeledTextField
               children={["Password", "password"]}
-              onChange={(e) => setUsername(e)}
+              onChange={(e) => setPassword(e)}
             ></LabeledTextField>
             <button
               type="button"
               onClick={() => {
-                clickLogin([username, password]);
+                clickLogin([email, password]);
               }}
               className="btn"
             >

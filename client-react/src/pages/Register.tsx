@@ -6,16 +6,16 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
 
   const clickRegister = async (item: string) => {
-    try {
-      const res = await register(item);
-      if (!res) {
-        throw "failed to register";
-      }
-      console.log("successfully registered");
-    } catch (err) {
-      console.log(err);
-    }
-    console.log(item);
+    register(item)
+      .then((res) => {
+        if (!res) {
+          throw "failed to register " + item;
+        }
+        console.log("registered " + item);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

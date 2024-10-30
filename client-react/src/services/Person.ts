@@ -11,3 +11,15 @@ export const register = async (item: string) => {
     console.log(err);
   }
 };
+
+export const login = async (item: string[]) => {
+  try {
+    const response = await personAxios.post("/login", item);
+    if (response.status === 201) {
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.log(err);
+  }
+};
