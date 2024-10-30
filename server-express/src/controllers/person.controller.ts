@@ -106,3 +106,45 @@ export const getone = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "error", error: err });
   }
 };
+
+export const register = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const entityManager = await getEntityManager();
+    const email = req.body[0];
+
+    const newStaff = [
+      {
+        email: email,
+        auth: { password: "testpw1" },
+      },
+    ];
+
+    const splitNewStaff = newStaff.map((data) => ({
+      personDetails: { email: data.email },
+      authDetails: { password: data.auth.password },
+    }));
+
+    await entityManager.transaction(async (transactionalEntityManager) => {
+      for (const details of splitNewStaff) {
+        const newPerson = await transactionalEntityManager.save(
+          Person,
+          details.personDetails
+        );
+        await transactionalEntityManager.save(PersonAuth, {
+          ...details.authDetails,
+          person: newPerson,
+        });
+      }
+    });
+
+    res.status(201).json("success");
+  } catch (err: any) {
+    if (err.code === "23505") {
+      res.status(409).json({ message: "email already exists" });
+      return;
+    }
+    res.status(500).json("server error");
+  }
+};
+
+export const login = async (req: Request, res: Response): Promise<void> => {};

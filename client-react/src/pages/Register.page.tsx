@@ -1,10 +1,20 @@
 import { useState } from "react";
+import { register } from "../services/Register.service";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Register = () => {
   const [email, setEmail] = useState<string>("");
 
-  const clickRegister = (item: string) => {
+  const clickRegister = async (item: string) => {
+    try {
+      const res = await register(item);
+      if (!res) {
+        throw "failed to register";
+      }
+      console.log("successfully registered");
+    } catch (err) {
+      console.log(err);
+    }
     console.log(item);
   };
 

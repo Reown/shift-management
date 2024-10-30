@@ -27,15 +27,15 @@ body {
     justify-content: center;
 }
 
-.textarea {
+.textfield {
     background-color: #181818;
     border-color: #007053;
     color: #F8F8F8;
     margin-top: 5px;
-    width:95%;
+    width:100%;
 }
 
-.textarea:focus{
+.textfield:focus{
     background: transparent;
     color: #F8F8F8;
 }
@@ -43,7 +43,7 @@ body {
 .btn {
     background-color: #007053;
     color: #F8F8F8;
-    width: 95%;
+    width: 96%;
 }
 
 .btn:hover {
