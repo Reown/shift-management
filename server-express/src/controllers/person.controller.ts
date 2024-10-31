@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { getEntityManager } from "../config/entity-manager";
+import { bcrypt, match, genRandomPw } from "../helpers/password.helper";
 import { Person } from "../entities/person.entity";
 import { PersonAuth } from "../entities/person_auth.entity";
 import { PersonInfo } from "../entities/person_info.entity";
@@ -111,11 +112,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const entityManager = await getEntityManager();
     const email = req.body[0];
+    let password = genRandomPw(12);
+    console.log(password);
+    password = await bcrypt(password);
 
     const newStaff = [
       {
         email: email,
-        auth: { password: "testpw1" },
+        auth: { password: password },
       },
     ];
 
@@ -137,13 +141,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       }
     });
 
-    res.status(201).json("success");
+    res.status(201).json({ message: "Successfully logged in" });
   } catch (err: any) {
     if (err.code === "23505") {
-      res.status(409).json({ message: "email already exists" });
+      res.status(409).json({ error: "Email already exists" });
       return;
     }
-    res.status(500).json("server error");
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -152,34 +156,30 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const entityManager = await getEntityManager();
     const data = req.body;
     const email = data[0];
-    const password1 = data[1];
+    const inputPw = data[1];
 
-    await entityManager.transaction(async (transactionalEntityManager) => {
-      {
-        const getEmail = await transactionalEntityManager.findOne(Person, {
-          where: { email: email },
-        });
-
-        if (getEmail === null) {
-          res.status(404).json({ message: "user not found" });
-          return;
-        }
-
-        const getpw = await transactionalEntityManager.findOne(PersonAuth, {
-          where: { person: getEmail },
-        });
-
-        if (getpw) {
-          const { password } = getpw;
-          if (password !== password1) {
-            res.status(401).json({ message: "wrong pw" });
-            return;
-          }
-        }
-
-        res.status(200).json({ message: "login success" });
-      }
+    const getPerson = await entityManager.findOne(Person, {
+      where: { email: email },
     });
+
+    if (getPerson === null) {
+      res.status(404).json({ error: "Email not found" });
+      return;
+    }
+
+    const getAuth = await entityManager.findOne(PersonAuth, {
+      where: { person: getPerson },
+    });
+
+    if (getAuth) {
+      const { password } = getAuth;
+      const pwMatch = await match(inputPw, password);
+      if (!pwMatch) {
+        res.status(401).json({ error: "Invalid password" });
+        return;
+      }
+      res.status(200).json({ message: "Successfully logged in" });
+    }
   } catch (err) {
     console.log();
   }
