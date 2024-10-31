@@ -1,16 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { ParentContext } from "./SignUpAcc";
+
 import { LabeledTextField } from "../components/LabeledTextField";
 
-const SignUpDet = () => {
-  useEffect(() => {
-    setIsDisabled(true);
-    return () => {
-      setIsDisabled(false);
-    };
-  });
+const Setup = () => {
+  useEffect(() => {});
 
-  const { setIsDisabled } = useContext(ParentContext);
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [birthdate, setBirthdate] = useState<string>("");
@@ -60,7 +54,7 @@ const SignUpDet = () => {
   );
 };
 
-export default SignUpDet;
+export default Setup;
 
 // role, occupation
 //create label+textbox component
