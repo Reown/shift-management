@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Setup = () => {
@@ -11,7 +10,7 @@ const Setup = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [cfmPassword, setCfmPassword] = useState<string>("");
 
-  const clickSignup = (item: string[]) => {
+  const clickConfirm = (item: string[]) => {
     console.log([firstName, lastName, birthDate]);
   };
 
@@ -60,7 +59,7 @@ const Setup = () => {
             type="button"
             className="btn"
             onClick={() => {
-              clickSignup([]);
+              clickConfirm([]);
             }}
           >
             Confirm details
