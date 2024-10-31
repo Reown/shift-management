@@ -7,16 +7,19 @@ const Setup = () => {
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  const [birthdate, setBirthdate] = useState<string>("");
+  const [birthDate, setBirthDate] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [cfmPassword, setCfmPassword] = useState<string>("");
 
   const clickSignup = (item: string[]) => {
-    console.log([firstName, lastName, birthdate]);
+    console.log([firstName, lastName, birthDate]);
   };
 
   return (
-    <div className="card loginblock mx-auto item2">
+    <div className="card loginblock mx-auto">
       <div className="card-body">
         <form className="row g-3 formbody">
+          <p>Enter personal details</p>
           <div className="col-md-6">
             <LabeledTextField
               children={["First Name", "text"]}
@@ -36,7 +39,21 @@ const Setup = () => {
           <LabeledTextField
             children={["Date of Birth", "date"]}
             onChange={(e) => {
-              setBirthdate(e);
+              setBirthDate(e);
+            }}
+          ></LabeledTextField>
+          <p></p>
+          <p>Set new password</p>
+          <LabeledTextField
+            children={["New password", "password"]}
+            onChange={(e) => {
+              setNewPassword;
+            }}
+          ></LabeledTextField>
+          <LabeledTextField
+            children={["Confirm password", "password"]}
+            onChange={(e) => {
+              setCfmPassword;
             }}
           ></LabeledTextField>
           <button
@@ -46,7 +63,7 @@ const Setup = () => {
               clickSignup([]);
             }}
           >
-            Signup
+            Confirm details
           </button>
         </form>
       </div>
