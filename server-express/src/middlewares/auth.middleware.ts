@@ -17,8 +17,10 @@ export const createToken = async (req: Request, res: Response) => {
 
     if (getPerson) {
       const { email, role, info } = getPerson;
+      console.log(info);
       if (info === null) {
         res.status(400).json({ error: "Info not found" });
+        return;
       }
       const token = newToken(email, role.role);
       res.status(201).json(token);

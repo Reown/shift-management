@@ -11,6 +11,8 @@ export const createToken = async (item: string) => {
         sameSite: "strict",
       });
       return true;
+    } else if (response.status === 400) {
+      return false;
     }
     return false;
   } catch (err) {

@@ -20,8 +20,9 @@ const Login = () => {
         createToken(item[0]).then((res) => {
           if (!res) {
             navigate("/setup");
+          } else {
+            navigate("/dashboard");
           }
-          navigate("/dashboard");
         });
       })
       .catch((err) => {
