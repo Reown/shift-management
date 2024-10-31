@@ -20,3 +20,5 @@ export const createToken = async (item: string) => {
     return false;
   }
 };
+
+export const changePass = async (item: string) => {};

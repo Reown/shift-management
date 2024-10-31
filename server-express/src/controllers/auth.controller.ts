@@ -27,3 +27,5 @@ export const createToken = async (req: Request, res: Response) => {
     res.status(500);
   }
 };
+
+export const changePass = async (req: Request, res: Response) => {};
