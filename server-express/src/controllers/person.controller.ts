@@ -111,7 +111,8 @@ export const getone = async (req: Request, res: Response): Promise<void> => {
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const entityManager = await getEntityManager();
-    const email = req.body[0];
+    const data = req.body;
+    const email = data[0];
     let password = genRandomPw(12);
     console.log(password);
     password = await bcrypt(password);
@@ -120,12 +121,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       {
         email: email,
         auth: { password: password },
+        role: { role: RolesEnum.USER },
       },
     ];
 
     const splitNewStaff = newStaff.map((data) => ({
       personDetails: { email: data.email },
       authDetails: { password: data.auth.password },
+      roleDetails: { role: data.role.role },
     }));
 
     await entityManager.transaction(async (transactionalEntityManager) => {
@@ -138,10 +141,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
           ...details.authDetails,
           person: newStaff,
         });
+        await transactionalEntityManager.save(PersonRole, {
+          ...details.roleDetails,
+          person: newStaff,
+        });
       }
     });
 
-    res.status(201).json({ message: "Successfully logged in" });
+    res.status(201).json({ message: "Successfully registered" });
   } catch (err: any) {
     if (err.code === "23505") {
       res.status(409).json({ error: "Email already exists" });
@@ -188,7 +195,5 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 export const getInfo = async (req: Request, res: Response): Promise<void> => {
   try {
     const entityManager = await getEntityManager();
-
-    await entityManager.transaction(async (transactionalEntityManager) => {});
   } catch (err) {}
 };
