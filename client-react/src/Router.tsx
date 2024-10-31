@@ -5,7 +5,6 @@ import ProfilesPage from "./pages/ProfilesPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
-import SignUpAcc from "./pages/SignUpAcc";
 import Setup from "./pages/Setup";
 import Register from "./pages/Register";
 import UserDashboard from "./pages/UserDashboard";
