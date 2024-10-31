@@ -7,14 +7,6 @@ body {
     display:flex;
 }
 
-.item1 {
-    height:325px;
-}
-
-.item2 {
-    height:600px;
-}
-
 .loginblock {
     background-color: #202020;
     border-color: #404040;
@@ -43,7 +35,7 @@ body {
 .btn {
     background-color: #007053;
     color: #F8F8F8;
-    width: 96%;
+    width: 95%;
 }
 
 .btn:hover {
