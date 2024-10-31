@@ -23,3 +23,15 @@ export const login = async (item: string[]) => {
     console.log(err);
   }
 };
+
+export const getInfo = async (item: string) => {
+  try {
+    const response = await personAxios.post("/getinfo", item);
+    if (response.status === 200) {
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.log(err);
+  }
+};
