@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/Person";
+import { createToken } from "../services/Auth";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Login = () => {
@@ -16,12 +17,17 @@ const Login = () => {
           throw "failed to log into " + item[0];
         }
         console.log("logged in");
-        navigate("/dashboard");
+        createToken(item[0]).then((res) => {
+          if (!res) {
+            navigate("/setup");
+          }
+          navigate("/dashboard");
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+  }; //33uWe3#6VNzY
 
   return (
     <div>
