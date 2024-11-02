@@ -18,10 +18,10 @@ const Setup = () => {
         if (!res) {
           throw "failed to update";
         }
-        console.log("done");
         navigate("/dashboard");
       })
       .catch((err) => {
+        navigate("/login");
         console.log(err);
       });
   };
