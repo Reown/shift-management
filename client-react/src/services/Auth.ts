@@ -15,7 +15,7 @@ export const createToken = async (item: string) => {
     return false;
   } catch (err: any) {
     if (err.response.status) {
-      console.log("Error: " + err.response.status.error);
+      console.log("Error: " + err.response.data.error);
     }
     console.log(err);
     return false;
