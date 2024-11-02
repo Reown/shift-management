@@ -9,13 +9,15 @@ export const verifyToken = async (
   try {
     const token = req.header("Authorization")?.replace("Bearer ", "");
     if (!token || token === "undefined") {
-      throw "bruh no token";
+      res.status(401).json({ error: "Token is missing" });
+      return;
     }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     res.locals.person = decoded;
     next();
   } catch (err) {
-    res.status(400).json("jwt error" + err);
+    res.status(401).json({ error: "JWT Error" });
   }
 };
 
