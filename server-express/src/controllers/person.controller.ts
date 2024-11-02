@@ -114,6 +114,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const data = req.body;
     const email = data[0];
     let password = genRandomPw(12);
+    password = "654321";
     console.log(password);
     password = await bcrypt(password);
 
