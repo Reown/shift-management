@@ -18,5 +18,3 @@ export const createToken = async (item: string) => {
     return true;
   }
 };
-
-export const changePass = async (item: string) => {};
