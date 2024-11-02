@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/Person";
 import { createToken } from "../services/Auth";
@@ -10,14 +10,15 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const clickLogin = (item: string[]) => {
-    login(item)
+  const clickLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login([email, password])
       .then((res) => {
         if (!res) {
-          throw "failed to log into " + item[0];
+          throw "failed to log into " + email;
         }
         console.log("logged in");
-        createToken(item[0]).then((res) => {
+        createToken(email).then((res) => {
           if (!res) {
             navigate("/setup");
           } else {
@@ -28,15 +29,13 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
-  }; //33uWe3#6VNzY
-  //923sjIoz1LSm
-  //N$fR@1R)5+Z3
+  };
 
   return (
     <div>
       <div className="card loginblock mx-auto">
         <div className="card-body">
-          <form className="row g-3 formbody">
+          <form className="row g-3 formbody" onSubmit={clickLogin}>
             <LabeledTextField
               children={["Email", "text"]}
               onChange={(e) => setEmail(e)}
@@ -45,13 +44,7 @@ const Login = () => {
               children={["Password", "password"]}
               onChange={(e) => setPassword(e)}
             ></LabeledTextField>
-            <button
-              type="button"
-              onClick={() => {
-                clickLogin([email, password]);
-              }}
-              className="btn"
-            >
+            <button type="submit" className="btn">
               Login
             </button>
           </form>

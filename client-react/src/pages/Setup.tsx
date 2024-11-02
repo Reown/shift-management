@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { insertNew } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
 
 const Setup = () => {
@@ -7,17 +8,16 @@ const Setup = () => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [birthDate, setBirthDate] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [cfmPassword, setCfmPassword] = useState<string>("");
 
-  const clickConfirm = (item: string[]) => {
-    console.log([firstName, lastName, birthDate]);
+  const clickConfirm = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(firstName, lastName, birthDate);
   };
 
   return (
     <div className="card loginblock mx-auto">
       <div className="card-body">
-        <form className="row g-3 formbody">
+        <form className="row g-3 formbody" onSubmit={clickConfirm}>
           <p>Enter personal details</p>
           <div className="col-md-6">
             <LabeledTextField
@@ -41,27 +41,7 @@ const Setup = () => {
               setBirthDate(e);
             }}
           ></LabeledTextField>
-          <p></p>
-          <p>Set new password</p>
-          <LabeledTextField
-            children={["New password", "password"]}
-            onChange={(e) => {
-              setNewPassword;
-            }}
-          ></LabeledTextField>
-          <LabeledTextField
-            children={["Confirm password", "password"]}
-            onChange={(e) => {
-              setCfmPassword;
-            }}
-          ></LabeledTextField>
-          <button
-            type="button"
-            className="btn"
-            onClick={() => {
-              clickConfirm([]);
-            }}
-          >
+          <button type="submit" className="btn">
             Confirm details
           </button>
         </form>
@@ -72,7 +52,5 @@ const Setup = () => {
 
 export default Setup;
 
-// role, occupation
-//create label+textbox component
-//const displayChild = children[1]
-//<ParentComponent children={['child1', "child2"]};
+//get email from login page
+//setup setupInfo using post in person not auth

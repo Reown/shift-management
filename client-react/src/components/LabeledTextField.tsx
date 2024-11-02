@@ -21,6 +21,7 @@ export const LabeledTextField = ({
         type={type}
         className="form-control textfield"
         onChange={handleChange}
+        required
       ></input>
     </div>
   );
