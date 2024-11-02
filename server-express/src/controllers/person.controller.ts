@@ -115,38 +115,27 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const email = data[0];
     let password = genRandomPw(12);
     password = "654321";
-    console.log(password);
     password = await bcrypt(password);
 
-    const regStaff = [
-      {
-        email: email,
-        auth: { password: password },
-        role: { role: RolesEnum.USER },
-      },
-    ];
-
-    const splitRegStaff = regStaff.map((data) => ({
-      personDetails: { email: data.email },
-      authDetails: { password: data.auth.password },
-      roleDetails: { role: data.role.role },
-    }));
+    const details = {
+      personDetails: { email: email },
+      authDetails: { password: password },
+      roleDetails: { role: RolesEnum.USER },
+    };
 
     await entityManager.transaction(async (transactionalEntityManager) => {
-      for (const details of splitRegStaff) {
-        const newStaff = await transactionalEntityManager.save(
-          Person,
-          details.personDetails
-        );
-        await transactionalEntityManager.save(PersonAuth, {
-          ...details.authDetails,
-          person: newStaff,
-        });
-        await transactionalEntityManager.save(PersonRole, {
-          ...details.roleDetails,
-          person: newStaff,
-        });
-      }
+      const newPerson = await transactionalEntityManager.save(
+        Person,
+        details.personDetails
+      );
+      await transactionalEntityManager.save(PersonAuth, {
+        ...details.authDetails,
+        person: newPerson,
+      });
+      await transactionalEntityManager.save(PersonRole, {
+        ...details.roleDetails,
+        person: newPerson,
+      });
     });
     res.status(201).json({ message: "Successfully registered" });
   } catch (err: any) {

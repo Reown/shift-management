@@ -1,15 +1,19 @@
-import Cookies from "js-cookie";
 import { personAxios } from "../config/axios";
+import Cookies from "js-cookie";
 
 export const register = async (item: string) => {
   try {
-    const response = await personAxios.post("/register", [item]);
-    if (response.status === 201) {
-      return true;
+    const res = await personAxios.post("/register", [item]);
+    if (res.status === 201) {
+      console.log("Success: " + res.data.message);
+      return "/login";
     }
-    return false;
-  } catch (err) {
-    console.log(err);
+  } catch (err: any) {
+    if (err.response.status === 409) {
+      console.log("Error: " + err.response.data.error);
+    } else {
+      console.log(err);
+    }
   }
 };
 

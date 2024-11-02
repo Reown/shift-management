@@ -8,19 +8,12 @@ const Register = () => {
 
   const [email, setEmail] = useState<string>("");
 
-  const clickRegister = (e: FormEvent<HTMLFormElement>) => {
+  const clickRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    register(email)
-      .then((res) => {
-        if (!res) {
-          throw "failed to register " + email;
-        }
-        console.log("registered " + email);
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const res = await register(email);
+    if (res) {
+      navigate(res);
+    }
   };
 
   return (
