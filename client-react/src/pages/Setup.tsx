@@ -1,9 +1,11 @@
 import { FormEvent, useEffect, useState } from "react";
-import { insertNew } from "../services/Person";
+import { insertInfo } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
+import { useNavigate } from "react-router-dom";
 
 const Setup = () => {
   useEffect(() => {});
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -11,7 +13,17 @@ const Setup = () => {
 
   const clickConfirm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(firstName, lastName, birthDate);
+    insertInfo([firstName, lastName, birthDate])
+      .then((res) => {
+        if (!res) {
+          throw "failed to update";
+        }
+        console.log("done");
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

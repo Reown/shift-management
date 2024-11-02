@@ -118,7 +118,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     console.log(password);
     password = await bcrypt(password);
 
-    const newStaff = [
+    const regStaff = [
       {
         email: email,
         auth: { password: password },
@@ -126,14 +126,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       },
     ];
 
-    const splitNewStaff = newStaff.map((data) => ({
+    const splitRegStaff = regStaff.map((data) => ({
       personDetails: { email: data.email },
       authDetails: { password: data.auth.password },
       roleDetails: { role: data.role.role },
     }));
 
     await entityManager.transaction(async (transactionalEntityManager) => {
-      for (const details of splitNewStaff) {
+      for (const details of splitRegStaff) {
         const newStaff = await transactionalEntityManager.save(
           Person,
           details.personDetails
@@ -148,7 +148,6 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         });
       }
     });
-
     res.status(201).json({ message: "Successfully registered" });
   } catch (err: any) {
     if (err.code === "23505") {
@@ -193,8 +192,58 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const getInfo = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const entityManager = await getEntityManager();
-  } catch (err) {}
+export const insertInfo = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const entityManager = await getEntityManager();
+
+  const data = req.body;
+  const firstName = data[0];
+  const lastName = data[1];
+  const birthDate = data[2];
+  const email = res.locals.user.email;
+
+  const insertInfo = [
+    {
+      firstname: firstName,
+      lastname: lastName,
+      dob: birthDate,
+      joindate: new Date(),
+    },
+  ];
+
+  const splitData = insertInfo.map((data) => ({
+    infoDetails: {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      dob: data.dob,
+      joindate: data.joindate,
+    },
+  }));
+
+  const getPerson = await entityManager.findOne(Person, {
+    where: { email: email },
+  });
+
+  if (getPerson === null) {
+    res.status(404).json({ error: "Email not found" });
+    return;
+  }
+
+  const checkInfo = await entityManager.findOne(PersonInfo, {
+    where: {
+      person: getPerson,
+    },
+  });
+  if (checkInfo === null) {
+    for (const details of splitData) {
+      await entityManager.save(PersonInfo, {
+        ...details.infoDetails,
+        person: getPerson,
+      });
+    }
+    res.status(201).json({ message: "Updated" });
+  }
+  res.status(409).json({ error: "Info exists" });
 };

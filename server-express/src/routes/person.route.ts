@@ -5,7 +5,7 @@ import {
   remove,
   register,
   login,
-  getInfo,
+  insertInfo,
 } from "../controllers/person.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 
@@ -17,6 +17,6 @@ router.route("/getone/:id").get(getone);
 
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/getinfo").get(getInfo);
+router.route("/insertinfo").post(verifyToken, insertInfo);
 
 export default router;
