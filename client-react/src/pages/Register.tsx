@@ -1,11 +1,10 @@
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { register } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>("");
 
   const clickRegister = async (e: FormEvent<HTMLFormElement>) => {
