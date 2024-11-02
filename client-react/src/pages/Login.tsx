@@ -9,6 +9,7 @@ const Login = () => {
   useEffect(() => {
     Cookies.remove("token");
   });
+
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
