@@ -1,9 +1,9 @@
 import { personAxios } from "../config/axios";
 import { tokenHeader } from "../config/header";
 
-export const register = async (item: string) => {
+export const register = async (item: string[]) => {
   try {
-    const res = await personAxios.post("/register", [item]);
+    const res = await personAxios.post("/register", item);
     if (res.status === 201) {
       console.log("Success: " + res.data.message);
       return "/login";

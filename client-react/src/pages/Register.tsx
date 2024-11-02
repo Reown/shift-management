@@ -9,7 +9,7 @@ const Register = () => {
 
   const clickRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await register(email);
+    const res = await register([email]);
     if (res) {
       navigate(res);
     }
