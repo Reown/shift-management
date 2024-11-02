@@ -156,28 +156,26 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     const getPerson = await entityManager.findOne(Person, {
       where: { email: email },
+      relations: ["auth"],
     });
-
-    if (getPerson === null) {
+    if (!getPerson) {
       res.status(404).json({ error: "Email not found" });
       return;
     }
-
-    const getAuth = await entityManager.findOne(PersonAuth, {
-      where: { person: getPerson },
-    });
-
-    if (getAuth) {
-      const { password } = getAuth;
-      const pwMatch = await match(inputPw, password);
-      if (!pwMatch) {
-        res.status(401).json({ error: "Invalid password" });
-        return;
-      }
-      res.status(200).json({ message: "Successfully logged in" });
+    if (!getPerson.auth) {
+      res.status(404).json({ error: "Password not found" });
+      return;
     }
+
+    const pwMatch = await match(inputPw, getPerson.auth.password);
+    if (!pwMatch) {
+      res.status(401).json({ error: "Invalid password" });
+      return;
+    }
+
+    res.status(200).json({ message: "Successfully logged in" });
   } catch (err) {
-    console.log();
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
