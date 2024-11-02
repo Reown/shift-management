@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { personAxios } from "../config/axios";
 import { tokenHeader } from "../config/header";
 
@@ -36,15 +37,18 @@ export const login = async (item: string[]) => {
 
 export const newInfo = async (item: string[]) => {
   try {
-    const response = await personAxios.post("/newinfo", item, tokenHeader);
-    if (response.status === 201) {
-      return true;
+    const res = await personAxios.post("/newinfo", item, tokenHeader());
+    if (res.status === 201) {
+      console.log("Success: " + res.data.message);
+      return "/dashboard";
     }
-    return false;
   } catch (err: any) {
-    if (err.status === 409) {
-      return true;
+    if (err.response.status) {
+      console.log("Error: " + err.response.data.error);
+      if (err.response.status === 409) {
+        return "/dashboard";
+      }
+      console.log(err);
     }
-    console.log(err);
   }
 };

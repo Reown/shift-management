@@ -184,54 +184,40 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const newInfo = async (req: Request, res: Response): Promise<void> => {
-  const entityManager = await getEntityManager();
+  try {
+    const entityManager = await getEntityManager();
+    const email = res.locals.person.email;
+    const data = req.body;
+    const firstName = data[0];
+    const lastName = data[1];
+    const birthDate = data[2];
 
-  const data = req.body;
-  const firstName = data[0];
-  const lastName = data[1];
-  const birthDate = data[2];
-  const email = res.locals.user.email;
-
-  const newInfo = [
-    {
+    const infoDetails = {
       firstname: firstName,
       lastname: lastName,
       dob: birthDate,
       joindate: new Date(),
-    },
-  ];
+    };
 
-  const splitData = newInfo.map((data) => ({
-    infoDetails: {
-      firstname: data.firstname,
-      lastname: data.lastname,
-      dob: data.dob,
-      joindate: data.joindate,
-    },
-  }));
-
-  const getPerson = await entityManager.findOne(Person, {
-    where: { email: email },
-  });
-
-  if (getPerson === null) {
-    res.status(404).json({ error: "Email not found" });
-    return;
-  }
-
-  const checkInfo = await entityManager.findOne(PersonInfo, {
-    where: {
-      person: getPerson,
-    },
-  });
-  if (checkInfo === null) {
-    for (const details of splitData) {
-      await entityManager.save(PersonInfo, {
-        ...details.infoDetails,
-        person: getPerson,
-      });
+    const getPerson = await entityManager.findOne(Person, {
+      where: { email: email },
+      relations: ["info"],
+    });
+    if (!getPerson) {
+      res.status(404).json({ error: "Email not found" });
+      return;
     }
-    res.status(201).json({ message: "Updated" });
+    if (getPerson.info) {
+      res.status(409).json({ error: "Info already exists" });
+      return;
+    }
+
+    await entityManager.save(PersonInfo, {
+      ...infoDetails,
+      person: getPerson,
+    });
+    res.status(201).json({ message: "Successfully entered new info" });
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
   }
-  res.status(409).json({ error: "Info exists" });
 };

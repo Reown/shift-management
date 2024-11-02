@@ -1,29 +1,20 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { newInfo } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
-import { useNavigate } from "react-router-dom";
 
 const Setup = () => {
-  useEffect(() => {});
   const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [birthDate, setBirthDate] = useState<string>("");
 
-  const clickConfirm = (e: FormEvent<HTMLFormElement>) => {
+  const clickConfirm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    newInfo([firstName, lastName, birthDate])
-      .then((res) => {
-        if (!res) {
-          throw "failed to update";
-        }
-        navigate("/dashboard");
-      })
-      .catch((err) => {
-        navigate("/login");
-        console.log(err);
-      });
+    const res = await newInfo([firstName, lastName, birthDate]);
+    if (res) {
+      navigate(res);
+    }
   };
 
   return (
