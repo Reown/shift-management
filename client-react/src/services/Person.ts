@@ -1,5 +1,5 @@
 import { personAxios } from "../config/axios";
-import Cookies from "js-cookie";
+import { tokenHeader } from "../config/header";
 
 export const register = async (item: string) => {
   try {
@@ -35,11 +35,8 @@ export const login = async (item: string[]) => {
 };
 
 export const newInfo = async (item: string[]) => {
-  const config = {
-    headers: { Authorization: `Bearer ${Cookies.get("token") as string}` },
-  };
   try {
-    const response = await personAxios.post("/newinfo", item, config);
+    const response = await personAxios.post("/newinfo", item, tokenHeader);
     if (response.status === 201) {
       return true;
     }
