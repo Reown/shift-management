@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { insertInfo } from "../services/Person";
+import { newInfo } from "../services/Person";
 import { LabeledTextField } from "../components/LabeledTextField";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const Setup = () => {
 
   const clickConfirm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    insertInfo([firstName, lastName, birthDate])
+    newInfo([firstName, lastName, birthDate])
       .then((res) => {
         if (!res) {
           throw "failed to update";

@@ -192,10 +192,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const insertInfo = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const newInfo = async (req: Request, res: Response): Promise<void> => {
   const entityManager = await getEntityManager();
 
   const data = req.body;
@@ -204,7 +201,7 @@ export const insertInfo = async (
   const birthDate = data[2];
   const email = res.locals.user.email;
 
-  const insertInfo = [
+  const newInfo = [
     {
       firstname: firstName,
       lastname: lastName,
@@ -213,7 +210,7 @@ export const insertInfo = async (
     },
   ];
 
-  const splitData = insertInfo.map((data) => ({
+  const splitData = newInfo.map((data) => ({
     infoDetails: {
       firstname: data.firstname,
       lastname: data.lastname,

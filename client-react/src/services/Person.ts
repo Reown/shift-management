@@ -26,12 +26,12 @@ export const login = async (item: string[]) => {
   }
 };
 
-export const insertInfo = async (item: string[]) => {
+export const newInfo = async (item: string[]) => {
   const config = {
     headers: { Authorization: `Bearer ${Cookies.get("token") as string}` },
   };
   try {
-    const response = await personAxios.post("/insertinfo", item, config);
+    const response = await personAxios.post("/newinfo", item, config);
     if (response.status === 201) {
       return true;
     }
