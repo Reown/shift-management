@@ -11,19 +11,25 @@ export const createToken = async (req: Request, res: Response) => {
 
     const getPerson = await entityManager.findOne(Person, {
       where: { email: email },
-      relations: ["role", "info"],
+      relations: ["role"],
     });
-
-    if (getPerson) {
-      const { email, role, info } = getPerson;
-      const token = newToken(email, role.role);
-      if (info === null) {
-        res.status(202).json(token);
-        return;
-      }
-      res.status(201).json(token);
+    if (!getPerson) {
+      res.status(404).json({ error: "Email not found" });
+      return;
     }
+    if (!getPerson.role) {
+      res.status(404).json({ error: "Role not found" });
+      return;
+    }
+
+    const token = newToken(getPerson.email, getPerson.role.role);
+    if (!token) {
+      res.status(500).json({ error: "Token creation failed" });
+      return;
+    }
+
+    res.status(201).json(token);
   } catch (err) {
-    res.status(500);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

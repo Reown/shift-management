@@ -9,23 +9,24 @@ export const register = async (item: string) => {
       return "/login";
     }
   } catch (err: any) {
-    if (err.response.status === 409) {
+    if (err.response.status) {
       console.log("Error: " + err.response.data.error);
-    } else {
-      console.log(err);
     }
+    console.log(err);
   }
 };
 
 export const login = async (item: string[]) => {
   try {
-    const response = await personAxios.post("/login", item);
-    if (response.status === 200) {
-      return true;
+    const res = await personAxios.post("/login", item);
+    if (res.status === 200) {
+      console.log("Success: " + res.data.message);
+      return "/dashboard";
     }
-    return false;
-  } catch (err) {
-    Cookies.remove("token");
+  } catch (err: any) {
+    if (err.response.status) {
+      console.log("Error: " + err.response.data.error);
+    }
     console.log(err);
   }
 };

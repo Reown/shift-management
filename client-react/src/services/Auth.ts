@@ -3,18 +3,21 @@ import Cookies from "js-cookie";
 
 export const createToken = async (item: string) => {
   try {
-    const response = await authAxios.post("/createtoken", [item]);
-    Cookies.set("token", response.data, {
-      expires: 1,
-      secure: true,
-      sameSite: "strict",
-    });
-    if (response.status === 202) {
-      return false;
+    const res = await authAxios.post("/createtoken", [item]);
+    if (res) {
+      Cookies.set("token", res.data, {
+        expires: 1,
+        secure: true,
+        sameSite: "strict",
+      });
+      return true;
     }
-    return true;
-  } catch (err) {
+    return false;
+  } catch (err: any) {
+    if (err.response.status) {
+      console.log("Error: " + err.response.status.error);
+    }
     console.log(err);
-    return true;
+    return false;
   }
 };

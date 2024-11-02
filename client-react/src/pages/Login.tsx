@@ -6,29 +6,18 @@ import { LabeledTextField } from "../components/LabeledTextField";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const clickLogin = (e: FormEvent<HTMLFormElement>) => {
+  const clickLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login([email, password])
-      .then((res) => {
-        if (!res) {
-          throw "failed to log into " + email;
-        }
-        console.log("logged in");
-        createToken(email).then((res) => {
-          if (!res) {
-            navigate("/setup");
-          } else {
-            navigate("/dashboard");
-          }
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const res = await login([email, password]);
+    if (res) {
+      const token = await createToken(email);
+      if (token) {
+        navigate(res);
+      }
+    }
   };
 
   return (
