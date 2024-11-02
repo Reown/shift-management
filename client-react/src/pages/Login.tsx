@@ -1,10 +1,14 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/Person";
 import { createToken } from "../services/Auth";
 import { LabeledTextField } from "../components/LabeledTextField";
+import Cookies from "js-cookie";
 
 const Login = () => {
+  useEffect(() => {
+    Cookies.remove("token");
+  });
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

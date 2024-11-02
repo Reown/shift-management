@@ -22,6 +22,9 @@ export const login = async (item: string[]) => {
     if (res.status === 200) {
       console.log("Success: " + res.data.message);
       return "/dashboard";
+    } else if (res.status === 203) {
+      console.log("Success: " + res.data.message);
+      return "/setup";
     }
   } catch (err: any) {
     if (err.response.status) {

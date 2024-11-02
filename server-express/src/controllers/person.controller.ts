@@ -156,7 +156,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     const getPerson = await entityManager.findOne(Person, {
       where: { email: email },
-      relations: ["auth"],
+      relations: ["auth", "info"],
     });
     if (!getPerson) {
       res.status(404).json({ error: "Email not found" });
@@ -173,6 +173,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    if (!getPerson.info) {
+      res.status(203).json({ message: "Needs info" });
+      return;
+    }
     res.status(200).json({ message: "Successfully logged in" });
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
