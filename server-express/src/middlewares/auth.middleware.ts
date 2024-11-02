@@ -12,7 +12,7 @@ export const verifyToken = async (
       throw "bruh no token";
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    res.locals.user = decoded;
+    res.locals.person = decoded;
     next();
   } catch (err) {
     res.status(400).json("jwt error" + err);
