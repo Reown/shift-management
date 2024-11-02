@@ -17,6 +17,5 @@ export const genRandomPw = (length: number) => {
     const randomIndex = Math.floor(Math.random() * charset.length);
     password += charset[randomIndex];
   }
-
   return password;
 };

@@ -27,7 +27,6 @@ export const createToken = async (req: Request, res: Response) => {
       res.status(500).json({ error: "Token creation failed" });
       return;
     }
-
     res.status(201).json(token);
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
