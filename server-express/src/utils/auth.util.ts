@@ -9,6 +9,6 @@ export const newToken = (email: string, role: string) => {
   return token;
 };
 
-export const getToken = () => {};
-
-export const verToken = () => {};
+export const verToken = (token: string) => {
+  return jwt.verify(token, process.env.JWT_SECRET as string);
+};

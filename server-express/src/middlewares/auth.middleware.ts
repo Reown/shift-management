@@ -1,23 +1,22 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import { verToken } from "../utils/auth.util";
 
 export const verifyToken = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  const token = req.header("Authorization")?.replace("Bearer ", "");
+  if (!token || token === "undefined") {
+    res.status(401).json({ error: "Token is missing" });
+    return;
+  }
   try {
-    const token = req.header("Authorization")?.replace("Bearer ", "");
-    if (!token || token === "undefined") {
-      res.status(401).json({ error: "Token is missing" });
-      return;
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    const decoded = verToken(token);
     res.locals.person = decoded;
     next();
   } catch (err) {
-    res.status(401).json({ error: "JWT Error" });
+    res.status(401).json({ error: "Token verification failed" });
   }
 };
 

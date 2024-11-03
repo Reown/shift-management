@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { personAxios } from "../config/axios";
 import { tokenHeader } from "../config/header";
 
