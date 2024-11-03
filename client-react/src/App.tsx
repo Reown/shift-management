@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { newtask } from "./services/newtask";
 import { register, login, gettest } from "./services/OldPerson";
-import ListGroup from "./components/ListGroup";
-import Button from "./components/Button";
-import Alert from "./components/Alert";
-import ProfileButton from "./components/ProfileButton";
+import ListGroup from "./components/common/ListGroup";
+import Button from "./components/common/Button";
+import Alert from "./components/common/Alert";
+import ProfileButton from "./components/common/ProfileButton";
 import Cookies from "js-cookie";
 
 function App() {
