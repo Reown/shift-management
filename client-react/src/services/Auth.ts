@@ -24,18 +24,15 @@ export const createToken = async (item: string) => {
 };
 
 export const getTokenRole = async () => {
-  const token = Cookies.get("token");
-  if (token) {
-    try {
-      const res = await authAxios.get("/gettokenrole", tokenHeader());
-      if (res.status === 200) {
-        return res.data;
-      }
-    } catch (err: any) {
-      if (err.response.status) {
-        console.log("Error: " + err.response.data.error);
-      }
-      console.log(err);
+  try {
+    const res = await authAxios.get("/gettokenrole", tokenHeader());
+    if (res.status === 200) {
+      return res.data;
     }
+  } catch (err: any) {
+    if (err.response.status) {
+      console.log("Error: " + err.response.data.error);
+    }
+    console.log(err);
   }
 };
