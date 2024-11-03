@@ -11,7 +11,7 @@ const TokenRole = () => {
     };
 
     getRole();
-  });
+  }, []);
 
   return role;
 };
