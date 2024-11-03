@@ -27,7 +27,7 @@ export const getTokenRole = async () => {
   const token = Cookies.get("token");
   if (token) {
     try {
-      const res = await authAxios.post("/gettokenrole", tokenHeader());
+      const res = await authAxios.get("/gettokenrole", tokenHeader());
       if (res.status === 200) {
         return res.data;
       }

@@ -16,7 +16,7 @@ export const verifyToken = async (
     res.locals.person = decoded;
     next();
   } catch (err) {
-    res.status(401).json({ error: "Token verification failed" });
+    res.status(500).json({ error: "Token verification failed" });
   }
 };
 
