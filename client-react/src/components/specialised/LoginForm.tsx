@@ -1,8 +1,8 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LabeledTextField } from "../LabeledTextField";
 import { login } from "../../services/Person";
 import { createToken } from "../../services/Auth";
+import { LabeledTextField } from "../LabeledTextField";
 
 const LoginForm = () => {
   const navigate = useNavigate();
