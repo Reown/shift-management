@@ -8,3 +8,7 @@ export const newToken = (email: string, role: string) => {
   );
   return token;
 };
+
+export const getToken = () => {};
+
+export const verToken = () => {};

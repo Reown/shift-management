@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getEntityManager } from "../config/entity-manager";
-import { bcrypt, match, genRandomPw } from "../helpers/password.helper";
+import { bcrypt, match, genRandomPw } from "../utils/password.util";
 import { Person } from "../entities/person.entity";
 import { PersonAuth } from "../entities/person_auth.entity";
 import { PersonInfo } from "../entities/person_info.entity";

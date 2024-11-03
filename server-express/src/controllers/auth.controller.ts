@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getEntityManager } from "../config/entity-manager";
 import { Person } from "../entities/person.entity";
-import { newToken } from "../helpers/auth.helper";
+import { newToken } from "../utils/auth.util";
 
 export const createToken = async (req: Request, res: Response) => {
   try {
