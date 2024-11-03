@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 interface LabeledTextFieldProps {
   children: string[];
   onChange: (value: string) => void;
@@ -14,8 +12,9 @@ export const LabeledTextField = ({
   };
   const label = children[0];
   const type = children[1];
+
   return (
-    <div className="labeledtextfield">
+    <>
       <label>{label}</label>
       <input
         type={type}
@@ -23,6 +22,6 @@ export const LabeledTextField = ({
         onChange={handleChange}
         required
       ></input>
-    </div>
+    </>
   );
 };
