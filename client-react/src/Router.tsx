@@ -7,7 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
 import Setup from "./pages/Setup";
 import Register from "./pages/Register";
-import UserDashboard from "./pages/UserDashboard";
+import Dashboard from "./pages/Dashboard";
 
 const Router = createBrowserRouter([
   {
@@ -43,7 +43,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <UserDashboard />,
+    element: <Dashboard />,
   },
 ]);
 

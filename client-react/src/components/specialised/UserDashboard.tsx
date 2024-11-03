@@ -1,8 +1,6 @@
-import { useEffect } from "react";
+import React from "react";
 
 const UserDashboard = () => {
-  useEffect(() => {});
-
   return <div>UserDashboard</div>;
 };
 
