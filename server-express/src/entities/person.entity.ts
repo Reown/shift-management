@@ -2,12 +2,14 @@ import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { PersonRole } from "./person_role.entity";
 import { PersonAuth } from "./person_auth.entity";
 import { PersonInfo } from "./person_info.entity";
+import { Schedule } from "./schedule.entity";
 
 @Entity()
 export class Person extends BaseEntity {
@@ -25,4 +27,7 @@ export class Person extends BaseEntity {
 
   @OneToOne(() => PersonInfo, (info) => info.person, { cascade: true })
   info: PersonInfo;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.person, { cascade: true })
+  schedule: Schedule;
 }
