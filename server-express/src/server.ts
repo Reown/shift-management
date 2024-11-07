@@ -4,6 +4,7 @@ import taskRoutes from "./routes/tasks.route";
 import oldPersonRoutes from "./routes/oldperson.route";
 import testpkRoutes from "./routes/testpk.route";
 import personRoutes from "./routes/person.route";
+import scheduleRoutes from "./routes/schedule.route";
 import authRoutes from "./routes/auth.route";
 
 const main = async (): Promise<void> => {
@@ -17,6 +18,7 @@ const main = async (): Promise<void> => {
   app.use("/api/oldperson", oldPersonRoutes);
   app.use("/api/testpk", testpkRoutes);
   app.use("/api/person", personRoutes);
+  app.use("/api/schedule", scheduleRoutes);
   app.use("/api/auth", authRoutes);
 
   //app.get("/", (req: Request, res: Response) => {
