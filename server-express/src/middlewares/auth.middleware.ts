@@ -8,7 +8,7 @@ export const verifyToken = async (
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
   if (!token || token === "undefined") {
-    res.status(401).json({ error: "Token is missing" });
+    res.status(404).json({ error: "Token is missing" });
     return;
   }
   try {
@@ -16,7 +16,7 @@ export const verifyToken = async (
     res.locals.person = decoded;
     next();
   } catch (err) {
-    res.status(500).json({ error: "Token verification failed" });
+    res.status(401).json({ error: "Access denied" });
   }
 };
 
