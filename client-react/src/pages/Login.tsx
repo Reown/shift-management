@@ -8,7 +8,7 @@ const Login = () => {
   });
 
   return (
-    <div className="card loginblock mx-auto">
+    <div className="card block mx-auto">
       <div className="card-body">
         <LoginForm></LoginForm>
       </div>
