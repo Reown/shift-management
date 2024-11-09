@@ -1,6 +1,6 @@
 import { authAxios } from "../config/axios";
-import Cookies from "js-cookie";
 import { tokenHeader } from "../config/header";
+import Cookies from "js-cookie";
 
 export const createToken = async (item: string) => {
   try {
@@ -29,10 +29,12 @@ export const getTokenRole = async () => {
     if (res.status === 200) {
       return res.data;
     }
+    return null;
   } catch (err: any) {
     if (err.response.status) {
       console.log("Error: " + err.response.data.error);
     }
     console.log(err);
+    return null;
   }
 };

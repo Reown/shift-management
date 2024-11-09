@@ -16,4 +16,8 @@ const authAxios = axios.create({
   baseURL: "http://localhost:5432/api/auth/",
 });
 
-export { taskAxios, oldPersonAxios, personAxios, authAxios };
+const scheduleAxios = axios.create({
+  baseURL: "http://localhost:5432/api/schedule/",
+});
+
+export { taskAxios, oldPersonAxios, personAxios, authAxios, scheduleAxios };

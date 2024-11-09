@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getTokenRole } from "../services/Auth";
 
-const TokenRole = () => {
+const tokenRole = () => {
   const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const TokenRole = () => {
   return role;
 };
 
-export default TokenRole;
+export default tokenRole;
