@@ -10,14 +10,12 @@ export const LabeledTextField = ({
   const handleChange = (e: { target: { value: string } }) => {
     onChange(e.target.value);
   };
-  const label = children[0];
-  const type = children[1];
 
   return (
     <>
-      <label>{label}</label>
+      <label>{children[0]}</label>
       <input
-        type={type}
+        type={children[1]}
         className="form-control textfield"
         onChange={handleChange}
         required
