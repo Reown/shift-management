@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface LabeledDropDownProps {
   children: string[];
   shifts: string[];
@@ -14,6 +12,7 @@ export const LabeledDropDown = ({
   const handleSelect = (e: any) => {
     onClick(e.target.innerText);
   };
+
   return (
     <>
       <label>{children[0]}</label>
