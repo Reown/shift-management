@@ -6,6 +6,7 @@ import {
   register,
   login,
   newInfo,
+  changePw,
 } from "../controllers/person.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 
@@ -18,5 +19,6 @@ router.route("/getone/:id").get(getone);
 router.route("/register").post(register);
 router.route("/login").post(login);
 router.route("/newinfo").post(verifyToken, newInfo);
+router.route("/changepw").patch(verifyToken, changePw);
 
 export default router;

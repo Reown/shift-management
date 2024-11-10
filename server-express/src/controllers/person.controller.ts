@@ -140,7 +140,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     res.status(201).json({ message: "Successfully registered" });
   } catch (err: any) {
     if (err.code === "23505") {
-      res.status(409).json({ error: "Email already exists" });
+      res.status(409).json({ error: "Email already exist" });
       return;
     }
     res.status(500).json({ error: "Internal server error" });
@@ -217,6 +217,18 @@ export const newInfo = async (req: Request, res: Response): Promise<void> => {
       person: getPerson,
     });
     res.status(201).json({ message: "Successfully entered new info" });
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const changePw = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const entityManager = await getEntityManager();
+    const email = res.locals.person.email;
+    const data = req.body;
+    const oldPw = data[0];
+    const newPw = data[1];
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
   }
