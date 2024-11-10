@@ -7,7 +7,7 @@ body {
     display:flex;
 }
 
-.block {
+.formblock {
     background-color: #202020;
     border-color: #404040;
     color: #F8F8F8;
