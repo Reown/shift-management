@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import Cookies from "js-cookie";
 import LoginForm from "../components/specialised/LoginForm";
+import Cookies from "js-cookie";
 
 const Login = () => {
   useEffect(() => {
