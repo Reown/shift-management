@@ -1,4 +1,3 @@
-import { LabeledDropDown } from "../components/common/LabeledDropDown";
 import BidForm from "../components/specialised/BidForm";
 
 const UserDashboard = () => {

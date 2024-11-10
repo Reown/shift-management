@@ -50,8 +50,9 @@ body {
 .shiftbtn {
     background-color: #181818;
     border-color: #007053;
-    width: 50%;
-    margin-right: 145px;
+    margin-right: 110px;
+    margin-top: 5px;
+    width: 60%;
 }
 
 .shiftbtn:hover {

@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { getSchedule, bid } from "../controllers/schedule.controller";
+import { getSchedule, submitBid } from "../controllers/schedule.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 
 const router = Router();
 
 router.route("/getschedule").get(getSchedule);
-router.route("/bid").post(bid);
+router.route("/submitbid").post(verifyToken, submitBid);
 
 export default router;
