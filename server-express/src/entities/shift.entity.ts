@@ -9,8 +9,11 @@ export class Shift {
   @Column({ type: "varchar", length: 50 })
   shift_name: string;
 
-  @Column({ type: "varchar", length: 15 })
-  shift_time: string;
+  @Column({ type: "time" })
+  start_time: string;
+
+  @Column({ type: "time" })
+  end_time: string;
 
   @Column({ type: "int" })
   hours_of_work: number;

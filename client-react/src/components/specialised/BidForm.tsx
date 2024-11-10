@@ -6,14 +6,18 @@ import { LabeledDropDown } from "../common/LabeledDropDown";
 const BidForm = () => {
   const [day, setDay] = useState<string>("");
   const [selectedShift, setSelectedShift] = useState("none");
-  const shifts = ["Morning", "Midday", "Afternoon", "Evening"];
+  const shifts = [
+    "Morning 8-11",
+    "Midday 11-15",
+    "Afternoon 15-19",
+    "Evening 19-22",
+  ];
 
   const clickSubmitBid = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedShift !== "none") {
-      console.log(day, selectedShift);
+      const res = await submitBid([selectedShift, day]);
     }
-    //const res = await submitBid([selectedShift, day]);
   };
 
   return (

@@ -15,5 +15,6 @@ CREATE TABLE schedule (
   CONSTRAINT fk_schedule_person FOREIGN KEY (person_id)
     REFERENCES person(id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE
+    ON UPDATE CASCADE,
+  UNIQUE (shift_id, day_id, person_id)
 );
