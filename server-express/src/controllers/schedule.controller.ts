@@ -8,8 +8,7 @@ import { Day } from "../entities/day.entity";
 export const getSchedule = async (req: Request, res: Response) => {
   try {
     const entityManager = await getEntityManager();
-    //const email = res.locals.person.email;
-    const email = "777";
+    const email = res.locals.person.email;
 
     const getFull = await entityManager
       .createQueryBuilder(Schedule, "schedule")
@@ -19,31 +18,19 @@ export const getSchedule = async (req: Request, res: Response) => {
       .innerJoinAndSelect("person.info", "info")
       .where("person.email = :email", { email })
       .orderBy("day.full_date", "ASC")
-      .orderBy("shift.id", "ASC")
       .getMany();
 
-    const sorta: any = {};
+    const sortFull: any = {};
     getFull.forEach((schedule) => {
-      const first_name = schedule.person.info.firstname;
       const full_date = schedule.day.full_date.toLocaleString();
       const shift_name = schedule.shift.shift_name;
 
-      if (!sorta[first_name]) {
-        sorta[first_name] = {};
+      if (!sortFull[full_date]) {
+        sortFull[full_date] = [];
       }
-      if (!sorta[first_name][full_date]) {
-        sorta[first_name][full_date] = [];
-      }
-      sorta[first_name][full_date].push(shift_name);
+      sortFull[full_date].push(shift_name);
     });
-    /*
-    sorta.forEach((entry: any) => {
-      console.log(`${entry[0]} is working on ${entry[1]} on ${entry[2]}`);
-    });
-    */
-    console.log(sorta);
-
-    res.status(200).json({ getFull });
+    res.status(200).json({ sortFull });
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -84,7 +71,7 @@ export const submitBid = async (req: Request, res: Response) => {
       day: getDay,
       person: getPerson,
     });
-    res.status(200).json({
+    res.status(201).json({
       message: `Successfully submitted bid for: ${getShift.shift_name} on ${getDay.full_date}`,
     });
   } catch (err: any) {

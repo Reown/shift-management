@@ -15,8 +15,19 @@ body {
     margin-top: 200px;
 }
 
+.displayblock {
+    background-color: #202020;
+    border-color: #404040;
+    color: #F8F8F8;
+    width: 700px;
+}
+
 .formbody {
     justify-content: center;
+}
+
+.card-title{
+    text-align: center;
 }
 
 .textfield {
@@ -40,11 +51,6 @@ body {
 
 .btn:hover {
     background-color: #00bc8c;
-}
-
-.disabled {
-    pointer-events: none; 
-    opacity: 0.5; 
 }
 
 .shiftbtn {

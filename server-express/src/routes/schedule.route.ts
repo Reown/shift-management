@@ -4,7 +4,7 @@ import { verifyToken } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.route("/getschedule").get(getSchedule);
+router.route("/getschedule").get(verifyToken, getSchedule);
 router.route("/submitbid").post(verifyToken, submitBid);
 
 export default router;

@@ -16,7 +16,10 @@ const BidForm = () => {
   const clickSubmitBid = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedShift !== "none") {
-      await submitBid([selectedShift, day]);
+      const res = await submitBid([selectedShift, day]);
+      if (res) {
+        //refresh
+      }
     } else {
       console.log("Select a shift");
     }
