@@ -1,5 +1,5 @@
 import { scheduleAxios } from "../config/axios";
-import { tokenHeader } from "../config/header";
+import tokenHeader from "../config/header";
 
 export const getSchedule = async () => {
   try {

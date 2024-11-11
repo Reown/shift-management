@@ -3,23 +3,26 @@ import { getSchedule } from "../services/Schedule";
 import BidForm from "../components/specialised/BidForm";
 
 const UserDashboard = () => {
-  useEffect(() => {
-    getS();
-  }, []);
-
-  const [sched, setSched] = useState<any>([]);
+  const [schedule, setSchedule] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
-  const getS = async () => {
+  const callGetSchedule = async () => {
     try {
       const res = await getSchedule();
-      setSched(res);
-    } catch (err) {
-      console.log("error" + err);
+      setSchedule(res);
+    } catch (err: any) {
+      if (err.response.status) {
+        console.log("Error: " + err.response.data.error);
+      }
+      console.log(err);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    callGetSchedule();
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -32,7 +35,7 @@ const UserDashboard = () => {
         <div className="card-body">
           <h3 className="card-title">Upcoming Schedule</h3>
           <hr />
-          {sched.map((item: any, index: number) => (
+          {schedule.map((item: any, index: number) => (
             <div key={index} className="json-item">
               <h5>Date: {item.date}</h5>
               <p>

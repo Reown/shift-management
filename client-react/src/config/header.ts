@@ -1,7 +1,9 @@
 import Cookies from "js-cookie";
 
-export const tokenHeader = () => {
+const tokenHeader = () => {
   return {
     headers: { Authorization: `Bearer ${Cookies.get("token") as string}` },
   };
 };
+
+export default tokenHeader;

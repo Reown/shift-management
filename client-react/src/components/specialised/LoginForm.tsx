@@ -13,7 +13,7 @@ const LoginForm = () => {
     e.preventDefault();
     const res = await login([email, password]);
     if (res) {
-      const token = await createToken(email);
+      const token = await createToken([email]);
       if (token) {
         navigate(res);
       }

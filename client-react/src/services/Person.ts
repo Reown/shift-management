@@ -1,5 +1,5 @@
 import { personAxios } from "../config/axios";
-import { tokenHeader } from "../config/header";
+import tokenHeader from "../config/header";
 
 export const register = async (item: string[]) => {
   try {
