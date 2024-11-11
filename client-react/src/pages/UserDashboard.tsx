@@ -7,15 +7,9 @@ const UserDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   const callGetSchedule = async () => {
-    try {
-      const res = await getSchedule();
+    const res = await getSchedule();
+    if (res) {
       setSchedule(res);
-    } catch (err: any) {
-      if (err.response.status) {
-        console.log("Error: " + err.response.data.error);
-      }
-      console.log(err);
-    } finally {
       setLoading(false);
     }
   };
