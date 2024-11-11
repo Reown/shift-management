@@ -1,3 +1,9 @@
 # shift-management
 learning react
-test commit
+
+Tech stack 
+
+Frontend
+
+
+Backend

@@ -25,4 +25,5 @@ const Dashboard = () => {
     return <div> {renderDashboard(role)}</div>;
   }
 };
+
 export default Dashboard;

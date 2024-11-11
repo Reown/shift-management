@@ -3,10 +3,7 @@ interface LabeledTextFieldProps {
   onChange: (value: string) => void;
 }
 
-export const LabeledTextField = ({
-  children,
-  onChange,
-}: LabeledTextFieldProps) => {
+const LabeledTextField = ({ children, onChange }: LabeledTextFieldProps) => {
   const handleChange = (e: { target: { value: string } }) => {
     onChange(e.target.value);
   };
@@ -23,3 +20,5 @@ export const LabeledTextField = ({
     </>
   );
 };
+
+export default LabeledTextField;

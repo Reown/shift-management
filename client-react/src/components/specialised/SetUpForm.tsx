@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { newInfo } from "../../services/Person";
-import { LabeledTextField } from "../common/LabeledTextField";
+import LabeledTextField from "../common/LabeledTextField";
 
 const SetUpForm = () => {
   const navigate = useNavigate();

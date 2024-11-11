@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { submitBid } from "../../services/Schedule";
-import { LabeledTextField } from "../common/LabeledTextField";
-import { LabeledDropDown } from "../common/LabeledDropDown";
+import LabeledTextField from "../common/LabeledTextField";
+import LabeledDropDown from "../common/LabeledDropDown";
 
 const BidForm = () => {
   const [day, setDay] = useState<string>("");

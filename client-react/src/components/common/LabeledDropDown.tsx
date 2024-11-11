@@ -4,7 +4,7 @@ interface LabeledDropDownProps {
   onClick: (value: string) => void;
 }
 
-export const LabeledDropDown = ({
+const LabeledDropDown = ({
   children,
   shifts,
   onClick,
@@ -35,3 +35,5 @@ export const LabeledDropDown = ({
     </>
   );
 };
+
+export default LabeledDropDown;
