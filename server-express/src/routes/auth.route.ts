@@ -5,6 +5,6 @@ import { verifyToken } from "../middlewares/auth.middleware";
 const router = Router();
 
 router.route("/createtoken").post(createToken);
-router.route("/gettokenrole").get(verifyToken, getTokenRole);
+router.route("/verifytokenrole").get(verifyToken, getTokenRole);
 
 export default router;
